@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Оплата</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container_pay">
+        <header class="header_ticket">
+            <h1 class="header-content">Идём<span class="letter">в</span>кино</h1>
+        </header>
+
+        <main class="main__ticket">
+            <div class="header__payment">
+                <h2 class="headind__payment">Вы выбрали билеты:</h2>
+            </div>
+
+            <section class="ticket__info-wrapper">
+                <div class="ticket__info">
+                    <p class="name__payment info-payment__text">На фильм: <span class="text-bold__payment"></span></p>
+                    <p class="place__payment info-payment__text">Места: <span class="text-bold__payment"></span></p>
+                    <p class="hall__payment info-payment__text">В зале: <span class="text-bold__payment"></span></p>
+                    <p class="time__payment info-payment__text">Начало сеанса: <span class="text-bold__payment"></span></p>
+                    <p class="price__payment info-payment__text">Стоимость:  <span class="text-bold__payment"></span> рублей</p>
+                </div>
+                <div class="btn_pay">
+                    <button class="label_btn-pay">Получить код бронирования</button>
+                </div>
+                <div class="ticket__hint">
+                    <p class="ticket__hint-text">После оплаты билет будет доступен в этом окне, а также придёт вам на почту. Покажите QR-код нашему контроллёру у входа в зал.</p>
+                    <p class="ticket__hint-text">Приятного просмотра!</p>
+                </div>
+            </section>
+        </main>
+    </div>
+    <script src="./js/pay.js"></script>
+</body>

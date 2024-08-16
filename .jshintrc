@@ -1,0 +1,16 @@
+{
+    "esversion": 6,
+    "node": true,
+    "browser": true,
+    "devel": true,
+    "globals": {
+      "jQuery": true
+    },
+    "extends": "eslint:recommended",
+    "rules": {
+      "indent": ["error", 2],
+      "linebreak-style": ["error", "unix"],
+      "quotes": ["error", "double"],
+      "semi": ["error", "always"]
+    }
+  }

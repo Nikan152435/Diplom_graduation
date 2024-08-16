@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Электронный билет</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <script src="./js/QRCreator.js" defer></script>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container__ticket">
+        <header class="header_ticket">
+            <h1 class="header-content">Идём<span class="letter">в</span>кино</h1>
+        </header>
+
+        <main class="main__ticket">
+            <div class="header__payment">
+                <h2 class="headind__payment">Электронный билет</h2>
+            </div>
+
+            <section class="ticket__info-wrapper">
+                <div class="ticket__info">
+                    <p class="name__payment info-payment__text">На фильм: <span class="text-bold__payment"></span></p>
+                    <p class="place__payment info-payment__text">Места: <span class="text-bold__payment"></span></p>
+                    <p class="hall__payment info-payment__text">В зале: <span class="text-bold__payment"></span></p>
+                    <p class="time__payment info-payment__text">Начало сеанса: <span class="text-bold__payment"></span></p>
+                </div>
+                <div class="qr"></div>
+                <div class="ticket__hint">
+                    <p class="ticket__hint-text">Покажите QR-код нашему контроллеру для подтверждения бронирования.</p>
+                    <p class="ticket__hint-text">Билет действителен строго на свой сеанс</p>
+                </div>
+            </section>
+        </main>
+    </div>
+    <script src="./js/ticket.js" defer></script>
+</body>

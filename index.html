@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Кинотеатр</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container__index">
+        <header class="header__index">
+            <!-- Логотип -->
+            <img src="./images/фон1.png" alt="Кинотеатр Логотип" class="logo">
+            <h1 class="header-content">Идём<span class="letter">в</span>кино</h1>
+            <!-- Кнопка с изображением -->
+            <button class="btn__index">
+                <img src="./images/экран.png" alt="Войти" class="btn-icon">
+                <span class="btn-label__index">Войти</span>
+            </button>
+        </header>
+
+        <nav class="menu">
+            <ul class="menu-list">      
+                <li class="today revers">
+                    <p class="text_menu">Сегодня</p>
+                    <p class="text_menu"></p>
+                </li>
+                <li class="menu-list-item">
+                    <img src="./images/adm__chair.png" alt="Меню 1">
+                    <p class="text_menu"></p>
+                    <p class="text_menu"></p>
+                </li>
+                <li class="menu-list-item">
+                    <img src="./images/adm__chair1.png" alt="Меню 2">
+                    <p class="text_menu"></p>
+                    <p class="text_menu"></p>
+                </li>
+                <li class="menu-list-item">
+                    <img src="./images/adm__chair2.png" alt="Меню 3">
+                    <p class="text_menu"></p>
+                    <p class="text_menu"></p>
+                </li>
+                <li class="menu-list-item">
+                    <img src="./images/занято.png" alt="Меню 4">
+                    <p class="text_menu"></p>
+                    <p class="text_menu"></p>
+                </li>
+                <li class="menu-list-item">
+                    <img src="./images/свободно.png" alt="Меню 5">
+                    <p class="text_menu"></p>
+                    <p class="text_menu"></p>
+                </li>
+                <li class="menu-list-item">
+                    <img src="./images/свободно_вип.png" alt="Меню 6">
+                    <p class="text_menu"></p>
+                    <p class="text_menu"></p>
+                </li>
+                <li class="arrow_item right">
+                    <p class="arrow_text">&gt;</p>
+                </li>
+            </ul>
+        </nav>
+
+        <main class="main__index">
+            <!-- Основной контент с изображениями -->
+            <img src="./images/выбрано.png" alt="Основное изображение 1">
+            <img src="./images/delete_film.png" alt="Основное изображение 2">
+        </main>
+    </div>
+    <script src="./js/client.js" async></script>
+    <script src="./js/seance.js" async></script>
+</body>
+
+</html>
