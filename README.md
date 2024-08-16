@@ -13,5 +13,5 @@
 ### Клонирование репозитория
 
 ```bash
-git clone http://localhost:9000/
+git clone https://github.com/Nikan152435/Diplom_graduation
 cd Diplom_graduation
