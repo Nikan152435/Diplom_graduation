@@ -1988,3 +1988,89 @@
     }
   
   }
+                    
+                                     /*new*/
+  .seance-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 20px 0;
+}
+
+.seance-item {
+    margin-bottom: 15px;
+}
+
+.seance-link {
+    text-decoration: none;
+    color: #000;
+    font-weight: 500;
+    font-size: 18px;
+    transition: color 0.3s ease;
+}
+
+.seance-link:hover {
+    color: #ff6347; /* Меняем цвет при наведении */
+}
+/* Стили для выбранного элемента */
+.time__list-item.selected {
+  background-color: #4CAF50; /* Задний фон выделенного элемента (можно использовать другой цвет) */
+  color: white; /* Цвет текста для выделенного элемента */
+  border-radius: 4px; /* Закругление углов (по желанию) */
+  font-weight: bold; /* Жирный шрифт для выделенного элемента */
+}
+
+/* Стили для элементов, которые неактивны (если у вас есть такие стили) */
+.time__list-item.no_active {
+  color: #888; /* Цвет текста для неактивных элементов */
+  cursor: not-allowed; /* Курсор при наведении на неактивный элемент */
+}
+
+
+
+.seance-time:hover {
+  text-decoration: underline; /* Подчеркивание при наведении, если нужно */
+}
+
+.seance-time {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  width: 100%;
+  height: 100%;
+  text-align: center; /* Центрирование текста */
+  line-height: 30px; /* Высота строки, чтобы текст был вертикально выровнен */
+}
+
+.time__list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px; /* Расстояние между элементами */
+  padding: 0;
+  margin: 0;
+  list-style: none; /* Убирает маркеры списка */
+}
+
+/* Стили для кнопок */
+.time__list-item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50px; /* Ширина кнопки */
+  height: 30px; /* Высота кнопки */
+  margin: 0 4px 4px 0;
+  border-radius: 2px;
+  background: #FFF;
+  box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.12), 0px 2px 2px 0px rgba(0, 0, 0, 0.24);
+  cursor: pointer;
+}
+
+/* Стили для текста*/
+.time__list__text {
+  color: #000;
+  font-family: Roboto, sans-serif;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 17px;
+  text-align: center;
+} 
+

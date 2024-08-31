@@ -20,5 +20,9 @@
     },
     "dependencies": {
         "jquery": "^3.6.0"
-    }
+    },
+    "devServer": {
+        "contentBase": "./dist",
+        "watchContentBase": true
+      }
 }

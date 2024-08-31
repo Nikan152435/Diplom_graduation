@@ -13,5 +13,5 @@
 ### Клонирование репозитория
 
 ```bash
-git clone https://github.com/Nikan152435/Diplom_graduation
-cd Diplom_graduation
+https://github.com/Nikan152435
+Diplom_graduation

@@ -23,6 +23,11 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       template: './index.html',
+      filename: 'index.html', // файл будет сохранен как index.html в папке dist
+    }),
+    new HtmlWebpackPlugin({
+      template: './hall.html',
+      filename: 'hall.html', // файл будет сохранен как hall.html в папке dist
     }),
     new CopyWebpackPlugin({
       patterns: [
