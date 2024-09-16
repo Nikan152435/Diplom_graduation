@@ -40,13 +40,13 @@ fetch('https://shfe-diplom.neto-server.ru/alldata')
                                     <div class="movie-seances__hall" data-id=${data.result.seances[i].seance_hallid}>
                                         <h6 class="number__hall">${nameOfHall}</h6>
                                         <ul class="time__list"> 
-                                          
-
-                                            
+                                          <li>
+                                                                                         
 
                                             
                                              <a href="hall.html?seance_id=${data.result.seances[i].id}" class="seance-time">${data.result.seances[i].seance_time}</a>
-                                        </ul>
+                                           </li>
+                                             </ul>
                                     </div>
                                 </div> 
                             </section>`);
@@ -59,11 +59,12 @@ fetch('https://shfe-diplom.neto-server.ru/alldata')
                                         `<div class="movie-seances__hall" data-id=${data.result.seances[i].seance_hallid}>
                                             <h6 class="number__hall">${nameOfHall}</h6>
                                             <ul class="time__list">  
-
+                                                <li>
                                                 
 
                                                 <a href="hall.html?seance_id=${data.result.seances[i].id}" class="seance-time">${data.result.seances[i].seance_time}</a>
-                                            </ul>
+                                                </li>
+                                                </ul>
                                         </div>`);
                                     break;
                                 }
