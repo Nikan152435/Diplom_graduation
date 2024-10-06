@@ -13,5 +13,4 @@
 ### Клонирование репозитория
 
 ```bash
-https://github.com/Nikan152435
-Diplom_graduation
+https://nikan152435.github.io/Diplom_graduation/
