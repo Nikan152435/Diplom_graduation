@@ -12,8 +12,66 @@ let checkedmonth;
 let searchMonth;
 let checkedYear;
 
-today.classList.add("menu-list-item__checked");
+function updateTodayClass() {
+  if (today) {
+    today.classList.add("menu-list-item__checked");
+    today.firstElementChild.classList.add("text-menu__bold");
+    
+    today.lastElementChild.classList.add("text-menu__bold");
+  }
+}
+// today.classList.add("menu-list-item__checked");
+
+// Загрузка DOM
+document.addEventListener("DOMContentLoaded", function() {
+  const today = document.querySelector(".today");
+  updateTodayClass();
+// Проверяем, существует ли элемент с классом .today
+if (!today) {
+  console.error("Элемент с классом 'today' не найден");
+  return; // Прекращаем выполнение, если элемент не найден
+}
+if (today) {
+  // Если элемент найден, выполняем следующие действия
+
+
+  if (today.classList.contains("menu-list-item__checked")) {
+      let checkedDate = currentDate.getDate();
+      if (checkedDate < 10) {
+          checkedDate = "0" + checkedDate;
+      }
+      let checkedmonth = currentDate.getMonth();
+      let searchMonth;
+      if (checkedmonth < 9) {
+          searchMonth = "0" + (checkedmonth + 1);
+      } else {
+          searchMonth = checkedmonth + 1;
+      }
+      let checkedYear = currentDate.getFullYear();
+      localStorage.setItem('checkedDate', checkedDate);
+      localStorage.setItem('checkedYear', checkedYear);
+  }
+} else {
+  // Если элемента нет, выводим ошибку в консоль
+  console.error("Элемент с классом 'today' не найден");
+  const todayElement = document.querySelector('.today');
+if (!todayElement) {
+    console.error('Элемент с классом "today" не найден');
+}
+}
+});
+
+
+
+
+
+
+
 today.firstElementChild.classList.add("text-menu__bold");
+let someElement = document.querySelector('.someClass');
+if (someElement && someElement.firstElementChild) {
+    // работа с someElement.firstElementChild
+}
 today.lastElementChild.classList.add("text-menu__bold");
 if(today.classList.contains("menu-list-item__checked")) {
   checkedDate = currentDate.getDate();

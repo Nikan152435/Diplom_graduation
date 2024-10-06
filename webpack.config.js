@@ -38,8 +38,12 @@ module.exports = {
     }),
   ],
   devServer: {
-    contentBase: path.join(__dirname, 'dist'),
-    compress: true,
-    port: 9000,
+    static: {
+      directory: path.join(__dirname, 'dist'), // Папка для статики
+  },
+    compress: true, // Включает сжатие
+    port: 9000, // Порт, на котором будет запущен сервер
+    hot: true, // Включает горячую перезагрузку
+    historyApiFallback: true, // Поддержка истории
   },
 };

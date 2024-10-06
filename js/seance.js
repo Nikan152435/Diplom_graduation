@@ -3,26 +3,49 @@ let arr = [];
 
 // Загрузка данных и их отображение
 fetch('https://shfe-diplom.neto-server.ru/alldata')
-    .then(response => response.json())
+    // .then(response => response.json())
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Ошибка сети: ' + response.status); // Добавлена проверка на успешность ответа
+        }
+        return response.json();
+    })
     .then(function(data) {
         console.log(data);
-        
+        // Функция для сортировки и отображения сеансов
         function print() {
+            // Проверка существования данных перед сортировкой
+            if (!data.result || !data.result.seances || data.result.seances.length === 0) {
+                console.error('Нет данных для отображения сеансов');
+                return;
+            }
+            // Сортировка по времени
             data.result.seances.sort(function(a, b) {
                 return a.seance_time.replace(':', '') - b.seance_time.replace(':', '');
             });
 
+            // Основной цикл для отображения сеансов
             for (let i = 0; i < data.result.seances.length; i++) {
                 let countHalls = 0;
                 let indOfHall = data.result.halls.findIndex(el => data.result.seances[i].seance_hallid === el.id);
+                
+                // Проверка индекса зала и существования зала
+                if (indOfHall === -1) {
+                    console.error('Зал не найден для сеанса', data.result.seances[i].seance_hallid);
+                    continue; // Пропускаем этот сеанс
+                }
+
                 let nameOfHall = data.result.halls[indOfHall].hall_name;
 
+                // Проверка, что зал открыт
                 if (data.result.halls[indOfHall].hall_open === 1) {
                     const arrMovie = Array.from(document.querySelectorAll(".movie"));
                     let indOfFilm = arrMovie.findIndex(el => Number(el.dataset.id) === data.result.seances[i].seance_filmid);
-
+                    // Проверка индекса зала и существования зала
                     if (indOfFilm < 0) {
                         let indFilm = data.result.films.findIndex(el => data.result.seances[i].seance_filmid === el.id);
+                        // Проверка индекса фильма перед вставкой
+                        if (indFilm !== -1) {
                         mainIndex.insertAdjacentHTML("afterbegin", 
                             `<section class="movie" data-id=${data.result.seances[i].seance_filmid}>
                                 <div class="movie__info">
@@ -41,16 +64,16 @@ fetch('https://shfe-diplom.neto-server.ru/alldata')
                                         <h6 class="number__hall">${nameOfHall}</h6>
                                         <ul class="time__list"> 
                                           <li>
-                                                                                         
-
-                                            
-                                             <a href="hall.html?seance_id=${data.result.seances[i].id}" class="seance-time">${data.result.seances[i].seance_time}</a>
+                                                                                   
+                                            <a href="hall.html?seance_id=${data.result.seances[i].id}" class="seance-time">${data.result.seances[i].seance_time}</a>
                                            </li>
                                              </ul>
                                     </div>
                                 </div> 
                             </section>`);
+                        }
                     } else {
+                         // Работа с уже существующими фильмами и залами
                         for (let j = 0; j < arrMovie[indOfFilm].lastElementChild.children.length; j++) {
                             if (Number(arrMovie[indOfFilm].lastElementChild.children[j].dataset.id) !== data.result.seances[i].seance_hallid) {
                                 countHalls++;
@@ -61,7 +84,6 @@ fetch('https://shfe-diplom.neto-server.ru/alldata')
                                             <ul class="time__list">  
                                                 <li>
                                                 
-
                                                 <a href="hall.html?seance_id=${data.result.seances[i].id}" class="seance-time">${data.result.seances[i].seance_time}</a>
                                                 </li>
                                                 </ul>
@@ -85,8 +107,13 @@ fetch('https://shfe-diplom.neto-server.ru/alldata')
                 // Убираем выделение со всех мест
                 document.querySelectorAll('.time__list-item').forEach(el => el.classList.remove('selected'));
 
-                // Выделяем текущее выбранное место
-                event.target.classList.add('selected');
+                
+                // Проверка на наличие target перед добавлением класса
+                if (event.target) {
+                    event.target.classList.add('selected');
+                } else {
+                    console.error('Не удалось найти элемент для выделения');
+                }
 
                 // Сохраняем выбранное время сеанса
                 let checkedSeans = Number(event.target.dataset.id);
@@ -97,6 +124,8 @@ fetch('https://shfe-diplom.neto-server.ru/alldata')
 
                 // Переход на другую страницу (проверьте путь к файлу,  выбором мест)
                 window.location.href = './hall.html';
+
+                
             });
         });
 

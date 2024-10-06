@@ -21,9 +21,10 @@
         <main class="main">
             <section class="buying__info">
                 <div class="buying__info-description">
-                    <h2 class="film__name"></h2>
-                    <h3 class="film__time">Начало сеанса: </h3>
-                    <h4 class="hall__number"></h4>
+                    <!-- Место для отображения информации о фильме -->
+                    <h2 class="film__name"></h2> <!-- Название фильма -->
+                    <h3 class="film__time">Начало сеанса: </h3> <!-- Время начала сеанса -->
+                    <h4 class="hall__number"></h4> <!-- Номер зала -->
                 </div>
                 <div class="buying__info-hint">
                     <img class="tap__img" src="./images/hint.png" alt="тап">
@@ -35,6 +36,7 @@
                 <div class="buying-scheme__wrapper">
                     <img class="screen__img" src="./images/screen.png" alt="экран">
                     <div class="places">
+                        <!-- Здесь будут отображены места для сеанса -->
                     </div>
                 </div>
                 <div class="buying-scheme-legend">
@@ -62,10 +64,58 @@
                 </div>
             </section>
 
+            <!-- Кнопка для бронирования -->
             <button class="btn">
                 <span class="btn-label">Забронировать</span>
             </button>    
         </main>
     </div>
+
+    <!-- Скрипт для обработки страницы -->
     <script src="./js/hall.js"></script>
+    <script>
+        // Извлечение параметра seance_id из URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const seanceId = urlParams.get('seance_id');
+    
+        // Проверяем, что seanceId был успешно получен из URL
+        if (seanceId) {
+            console.log(`Получен seance_id: ${seanceId}`);
+            // Функция для запроса данных о сеансе на сервере
+            fetchSeanceData(seanceId);
+        } else {
+            console.error('seance_id не был передан в URL');
+        }
+    
+        // Функция для получения данных по seanceId с сервера
+        async function fetchSeanceData(seanceId) {
+            try {
+                // Отправляем запрос к серверу, используя seanceId
+                const response = await fetch(`http://localhost:9000/seances/${seanceId}`); // Используем HTTP
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+
+                // Получаем данные в формате JSON
+                const data = await response.json();
+
+                // Проверяем, что данные были получены и содержат необходимые поля
+                if (data && data.filmName && data.startTime && data.hallNumber) {
+                    console.log(data); // Выводим данные в консоль
+
+                    // Обновляем элементы на странице данными с сервера
+                    document.querySelector('.film__name').textContent = data.filmName; // Название фильма
+                    document.querySelector('.film__time').textContent += data.startTime; // Время начала сеанса
+                    document.querySelector('.hall__number').textContent = `Зал: ${data.hallNumber}`; // Номер зала
+                } else {
+                    console.error('Некорректные данные с сервера:', data);
+                }
+
+            } catch (error) {
+                // Обрабатываем возможные ошибки при запросе
+                console.error('Ошибка при получении данных:', error);
+            }
+        }
+    </script>
 </body>
+</html>

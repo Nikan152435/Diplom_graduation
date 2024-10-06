@@ -61,7 +61,7 @@
     width: 100%;
     display: block;
     padding-bottom: 186px;
-    background-image: url(../images/фон1.png);
+    background-image: url(../images/background1.png);
     background-repeat: no-repeat;
     background-position: bottom left;
     background-size: cover;
@@ -301,7 +301,7 @@
     display: flex;
     flex-direction: column;
     background-size: cover;
-    background-image: url(../images/фон1.png);
+    background-image: url(../images/background1.png);
     background-repeat: no-repeat;
     background-position: bottom right;
   }
@@ -596,7 +596,7 @@
   .container_pay {
     width: 100%;
     padding-bottom: 186px;
-    background-image: url(../images/фон1.png);
+    background-image: url(../images/background1.png);
     background-repeat: no-repeat;
     background-position: bottom left;
     background-size: cover; 
@@ -1048,7 +1048,7 @@
   .container__ticket {
     width: 100%;
     padding-bottom: 186px;
-    background-image: url(../images/фон1.png);
+    background-image: url(../images/background1.png);
     background-repeat: no-repeat;
     background-position: bottom right;
     background-size: cover;
