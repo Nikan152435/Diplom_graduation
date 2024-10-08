@@ -1,151 +1,157 @@
 const mainIndex = document.querySelector(".main__index");
 let arr = [];
 
-// Загрузка данных и их отображение
-fetch('https://shfe-diplom.neto-server.ru/alldata')
-    // .then(response => response.json())
-    .then(response => {
+// Функция для получения данных с сервера
+async function fetchData(url) {
+    try {
+        const response = await fetch(url);
         if (!response.ok) {
-            throw new Error('Ошибка сети: ' + response.status); // Добавлена проверка на успешность ответа
+            throw new Error('Ошибка сети: ' + response.status);
         }
-        return response.json();
-    })
-    .then(function(data) {
-        console.log(data);
-        // Функция для сортировки и отображения сеансов
-        function print() {
-            // Проверка существования данных перед сортировкой
-            if (!data.result || !data.result.seances || data.result.seances.length === 0) {
-                console.error('Нет данных для отображения сеансов');
-                return;
+        return await response.json();
+    } catch (error) {
+        console.error('Ошибка при загрузке данных:', error);
+        alert('Произошла ошибка при загрузке данных. Попробуйте позже.');
+    }
+}
+
+// Функция для сортировки и отображения сеансов
+function displaySeances(data) {
+    if (!data.result || !data.result.seances || data.result.seances.length === 0) {
+        console.error('Нет данных для отображения сеансов');
+        return;
+    }
+
+    // Сортировка по времени
+    data.result.seances.sort((a, b) => a.seance_time.localeCompare(b.seance_time));
+
+    data.result.seances.forEach(seance => {
+        const hall = data.result.halls.find(h => h.id === seance.seance_hallid);
+        const film = data.result.films.find(f => f.id === seance.seance_filmid);
+
+        if (hall && hall.hall_open === 1 && film) {
+            const existingFilmElement = document.querySelector(`.movie[data-id="${film.id}"]`);
+
+            if (existingFilmElement) {
+                // Если фильм уже существует, добавляем новый сеанс
+                addSeanceToExistingFilm(existingFilmElement, hall, seance);
+            } else {
+                // Если фильм не существует, создаем новый элемент
+                createFilmElement(film, hall, seance);
             }
-            // Сортировка по времени
-            data.result.seances.sort(function(a, b) {
-                return a.seance_time.replace(':', '') - b.seance_time.replace(':', '');
-            });
-
-            // Основной цикл для отображения сеансов
-            for (let i = 0; i < data.result.seances.length; i++) {
-                let countHalls = 0;
-                let indOfHall = data.result.halls.findIndex(el => data.result.seances[i].seance_hallid === el.id);
-                
-                // Проверка индекса зала и существования зала
-                if (indOfHall === -1) {
-                    console.error('Зал не найден для сеанса', data.result.seances[i].seance_hallid);
-                    continue; // Пропускаем этот сеанс
-                }
-
-                let nameOfHall = data.result.halls[indOfHall].hall_name;
-
-                // Проверка, что зал открыт
-                if (data.result.halls[indOfHall].hall_open === 1) {
-                    const arrMovie = Array.from(document.querySelectorAll(".movie"));
-                    let indOfFilm = arrMovie.findIndex(el => Number(el.dataset.id) === data.result.seances[i].seance_filmid);
-                    // Проверка индекса зала и существования зала
-                    if (indOfFilm < 0) {
-                        let indFilm = data.result.films.findIndex(el => data.result.seances[i].seance_filmid === el.id);
-                        // Проверка индекса фильма перед вставкой
-                        if (indFilm !== -1) {
-                        mainIndex.insertAdjacentHTML("afterbegin", 
-                            `<section class="movie" data-id=${data.result.seances[i].seance_filmid}>
-                                <div class="movie__info">
-                                    <img class="movie__poster" src="${data.result.films[indFilm].film_poster}" alt="постер">
-                                    <div class="movie__description">
-                                        <h5 class="heading">${data.result.films[indFilm].film_name}</h5>
-                                        <p class="movie__synopsis">${data.result.films[indFilm].film_description}</p>
-                                        <div class="movie__data">
-                                            <p class="time">${data.result.films[indFilm].film_duration}</p>
-                                            <p class="origin">${data.result.films[indFilm].film_origin}</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="halls-block">
-                                    <div class="movie-seances__hall" data-id=${data.result.seances[i].seance_hallid}>
-                                        <h6 class="number__hall">${nameOfHall}</h6>
-                                        <ul class="time__list"> 
-                                          <li>
-                                                                                   
-                                            <a href="hall.html?seance_id=${data.result.seances[i].id}" class="seance-time">${data.result.seances[i].seance_time}</a>
-                                           </li>
-                                             </ul>
-                                    </div>
-                                </div> 
-                            </section>`);
-                        }
-                    } else {
-                         // Работа с уже существующими фильмами и залами
-                        for (let j = 0; j < arrMovie[indOfFilm].lastElementChild.children.length; j++) {
-                            if (Number(arrMovie[indOfFilm].lastElementChild.children[j].dataset.id) !== data.result.seances[i].seance_hallid) {
-                                countHalls++;
-                                if (countHalls === Number(arrMovie[indOfFilm].lastElementChild.children.length)) {
-                                    arrMovie[indOfFilm].lastElementChild.insertAdjacentHTML("beforeend", 
-                                        `<div class="movie-seances__hall" data-id=${data.result.seances[i].seance_hallid}>
-                                            <h6 class="number__hall">${nameOfHall}</h6>
-                                            <ul class="time__list">  
-                                                <li>
-                                                
-                                                <a href="hall.html?seance_id=${data.result.seances[i].id}" class="seance-time">${data.result.seances[i].seance_time}</a>
-                                                </li>
-                                                </ul>
-                                        </div>`);
-                                    break;
-                                }
-                            } else {
-                                arrMovie[indOfFilm].lastElementChild.children[j].lastElementChild.insertAdjacentHTML("beforeend", 
-                                    `<li class="time__list-item time__list__text" data-id="${data.result.seances[i].id}">${data.result.seances[i].seance_time}</li>`);
-                            }
-                        }
-                    }
-                }
-            }
+        } else {
+            console.error('Зал или фильм не найдены для сеанса', seance);
         }
-        print();
+    });
+}
+
+// Функция для создания элемента фильма
+function createFilmElement(film, hall, seance) {
+    const filmElement = document.createElement('section');
+    filmElement.classList.add('movie');
+    filmElement.setAttribute('data-id', film.id);
+
+    filmElement.innerHTML = `
+        <div class="movie__info">
+            <img class="movie__poster" src="${film.film_poster}" alt="постер">
+            <div class="movie__description">
+                <h5 class="heading">${film.film_name}</h5>
+                <p class="movie__synopsis">${film.film_description}</p>
+                <div class="movie__data">
+                    <p class="time">${film.film_duration}</p>
+                    <p class="origin">${film.film_origin}</p>
+                </div>
+            </div>
+        </div>
+        <div class="halls-block">
+            <div class="movie-seances__hall" data-id="${hall.id}">
+                <h6 class="number__hall">${hall.hall_name}</h6>
+                <ul class="time__list">
+                    <li>
+                        <a href="hall.html?seance_id=${seance.id}" class="seance-time">${seance.seance_time}</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    `;
+
+    mainIndex.insertAdjacentElement("afterbegin", filmElement);
+}
+
+// Функция для добавления сеанса к существующему фильму
+function addSeanceToExistingFilm(filmElement, hall, seance) {
+    const hallElement = filmElement.querySelector(`.movie-seances__hall[data-id="${hall.id}"]`);
+
+    if (hallElement) {
+        hallElement.querySelector('.time__list').insertAdjacentHTML("beforeend", `
+            <li class="time__list-item" data-id="${seance.id}">
+                <a href="hall.html?seance_id=${seance.id}" class="seance-time">${seance.seance_time}</a>
+            </li>
+        `);
+    } else {
+        // Если зал не существует, создаем новый элемент зала
+        const newHallElement = document.createElement('div');
+        newHallElement.classList.add('movie-seances__hall');
+        newHallElement.setAttribute('data-id', hall.id);
+        newHallElement.innerHTML = `
+            <h6 class="number__hall">${hall.hall_name}</h6>
+            <ul class="time__list">
+                <li class="time__list-item" data-id="${seance.id}">
+                    <a href="hall.html?seance_id=${seance.id}" class="seance-time">${seance.seance_time}</a>
+                </li>
+            </ul>
+        `;
+        filmElement.querySelector('.halls-block').appendChild(newHallElement);
+    }
+}
+
+// Функция для проверки доступности времени сеанса
+function isTimeAvailable(seanceTime) {
+    const currentTime = new Date();
+    const [hour, minute] = seanceTime.split(':').map(Number);
+    const seanceDate = new Date();
+    seanceDate.setHours(hour, minute);
+    return seanceDate >= currentTime;
+}
+
+// Функция для отображения доступных сеансов по времени
+function displayAvailableSeances() {
+    const timeListItems = document.querySelectorAll(".time__list-item");
+    timeListItems.forEach(item => {
+        if (!isTimeAvailable(item.textContent)) {
+            item.classList.add("no_active");
+        }
+    });
+}
+
+// Основной процесс загрузки и отображения данных
+async function main() {
+    const data = await fetchData('https://shfe-diplom.neto-server.ru/alldata');
+    if (data) {
+        displaySeances(data);
+        displayAvailableSeances();
 
         // Обработка выбора сеансов
         document.querySelectorAll('.time__list-item').forEach(item => {
             item.addEventListener('click', function(event) {
                 // Убираем выделение со всех мест
                 document.querySelectorAll('.time__list-item').forEach(el => el.classList.remove('selected'));
-
                 
                 // Проверка на наличие target перед добавлением класса
                 if (event.target) {
                     event.target.classList.add('selected');
-                } else {
-                    console.error('Не удалось найти элемент для выделения');
                 }
 
                 // Сохраняем выбранное время сеанса
                 let checkedSeans = Number(event.target.dataset.id);
                 localStorage.setItem('checkedSeans', checkedSeans);
 
-                // Отладка: вывод пути в консоль
-                console.log('Переход на страницу hall.html');
-
-                // Переход на другую страницу (проверьте путь к файлу,  выбором мест)
+                // Переход на другую страницу
                 window.location.href = './hall.html';
-
-                
             });
         });
+    }
+}
 
-        // Отображение доступных сеансов по времени
-        const timeListItem = document.querySelectorAll(".time__list-item");
-        const arrTimeListItem = Array.from(timeListItem);
-        if (Number(checkedDate) === Number(currentDate.getDate())) {
-            for (let i = 0; i < arrTimeListItem.length; i++) {   
-                if (Number(currentDate.getHours()) > Number(arrTimeListItem[i].textContent.slice(0, 2))) {
-                    arrTimeListItem[i].classList.add("no_active");
-                } else if (Number(currentDate.getHours()) === Number(arrTimeListItem[i].textContent.slice(3)) ) { //мин
-                    if (Number(currentDate.getMinutes()) > Number(arrTimeListItem[i].textContent.slice(3)) ) {
-                        arrTimeListItem[i].classList.add("no_active");
-                    } else {
-                        return;
-                    }
-                }
-            }
-        }
-    })
-    .catch(function(error) {
-        console.error('Ошибка при загрузке данных:', error);
-    });
+// Запуск основного процесса
+main();

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 
 <head>
     <meta charset="UTF-8">
@@ -10,6 +10,13 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+    <meta http-equiv="Content-Security-Policy" content="
+        default-src 'self'; 
+        script-src 'self' 'unsafe-eval'; 
+        connect-src 'self' https://shfe-diplom.neto-server.ru; 
+        font-src 'self' https://fonts.gstatic.com https://fonts.googleapis.com; 
+        img-src 'self' https://shfe-diplom.neto-server.ru; 
+        style-src 'self' https://fonts.googleapis.com;">
 </head>
 
 <body>
@@ -29,17 +36,18 @@
                     <p class="place__payment info-payment__text">Места: <span class="text-bold__payment"></span></p>
                     <p class="hall__payment info-payment__text">В зале: <span class="text-bold__payment"></span></p>
                     <p class="time__payment info-payment__text">Начало сеанса: <span class="text-bold__payment"></span></p>
-                    <p class="price__payment info-payment__text">Стоимость:  <span class="text-bold__payment"></span> рублей</p>
+                    <p class="price__payment info-payment__text">Стоимость: <span class="text-bold__payment"></span> рублей</p>
                 </div>
                 <div class="btn_pay">
                     <button class="label_btn-pay">Получить код бронирования</button>
                 </div>
                 <div class="ticket__hint">
-                    <p class="ticket__hint-text">После оплаты билет будет доступен в этом окне, а также придёт вам на почту. Покажите QR-код нашему контроллёру у входа в зал.</p>
+                    <p class="ticket__hint-text">После оплаты билет будет доступен в этом окне, а также придёт вам на почту. Покажите QR-код нашему контролёру у входа в зал.</p>
                     <p class="ticket__hint-text">Приятного просмотра!</p>
                 </div>
             </section>
         </main>
     </div>
-    <script src="./js/pay.js"></script>
+    <script src="./js/pay.js" defer></script>
 </body>
+</html>

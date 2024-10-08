@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 
 <head>
     <meta charset="UTF-8">
@@ -12,6 +12,13 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+    <meta http-equiv="Content-Security-Policy" content="
+        default-src 'self'; 
+        script-src 'self' 'unsafe-eval'; 
+        connect-src 'self' https://shfe-diplom.neto-server.ru; 
+        font-src 'self' https://fonts.gstatic.com https://fonts.googleapis.com; 
+        img-src 'self' https://shfe-diplom.neto-server.ru; 
+        style-src 'self' https://fonts.googleapis.com;">
 </head>
 
 <body>
@@ -32,13 +39,14 @@
                     <p class="hall__payment info-payment__text">В зале: <span class="text-bold__payment"></span></p>
                     <p class="time__payment info-payment__text">Начало сеанса: <span class="text-bold__payment"></span></p>
                 </div>
-                <div class="qr"></div>
+                <div class="qr" aria-label="QR-код"></div>
                 <div class="ticket__hint">
                     <p class="ticket__hint-text">Покажите QR-код нашему контроллеру для подтверждения бронирования.</p>
-                    <p class="ticket__hint-text">Билет действителен строго на свой сеанс</p>
+                    <p class="ticket__hint-text">Билет действителен строго на свой сеанс.</p>
                 </div>
             </section>
         </main>
     </div>
     <script src="./js/ticket.js" defer></script>
 </body>
+</html>

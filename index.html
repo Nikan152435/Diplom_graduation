@@ -10,17 +10,22 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+    
+    <meta http-equiv="Content-Security-Policy" content="
+    default-src 'self'; 
+    script-src 'self' 'unsafe-eval'; 
+    connect-src 'self' https://shfe-diplom.neto-server.ru; 
+    font-src 'self' https://fonts.gstatic.com https://fonts.googleapis.com; 
+    style-src 'self' https://fonts.googleapis.com; 
+    img-src 'self' https://shfe-diplom.neto-server.ru;">
+
 </head>
 
 <body>
     <div class="container__index">
         <header class="header__index">
-            <!-- Логотип -->
-            
             <h1 class="header-content">Идём<span class="letter">в</span>кино</h1>
-            <!-- Кнопка с изображением -->
             <button class="btn__index">
-                
                 <span class="btn-label__index">Войти</span>
             </button>
         </header>
@@ -29,37 +34,24 @@
             <ul class="menu-list">      
                 <li class="today revers">
                     <p class="text_menu">Сегодня</p>
-                    <p class="text_menu"></p>
                 </li>
                 <li class="menu-list-item">
-                    
-                    <p class="text_menu"></p>
-                    <p class="text_menu"></p>
+                    <p class="text_menu">Фильм 1</p>
                 </li>
                 <li class="menu-list-item">
-                    
-                    <p class="text_menu"></p>
-                    <p class="text_menu"></p>
+                    <p class="text_menu">Фильм 2</p>
                 </li>
                 <li class="menu-list-item">
-                    
-                    <p class="text_menu"></p>
-                    <p class="text_menu"></p>
+                    <p class="text_menu">Фильм 3</p>
                 </li>
                 <li class="menu-list-item">
-                    
-                    <p class="text_menu"></p>
-                    <p class="text_menu"></p>
+                    <p class="text_menu">Фильм 4</p>
                 </li>
                 <li class="menu-list-item">
-                    
-                    <p class="text_menu"></p>
-                    <p class="text_menu"></p>
+                    <p class="text_menu">Фильм 5</p>
                 </li>
                 <li class="menu-list-item">
-                    
-                    <p class="text_menu"></p>
-                    <p class="text_menu"></p>
+                    <p class="text_menu">Фильм 6</p>
                 </li>
                 <li class="arrow_item right">
                     <p class="arrow_text">&gt;</p>
@@ -72,8 +64,9 @@
             
         </main>
     </div>
-    <script src="./js/client.js" async></script>
-    <script src="./js/seance.js" async></script>
+
+    <script src="./js/client.js" defer></script> <!-- Используем defer для правильного порядка загрузки -->
+    <script src="./js/seance.js" defer></script> <!-- Используем defer для правильного порядка загрузки -->
 </body>
 
 </html>

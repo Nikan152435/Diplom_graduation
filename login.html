@@ -10,6 +10,14 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+    
+    <meta http-equiv="Content-Security-Policy" content="
+    default-src 'self'; 
+    script-src 'self' 'unsafe-inline' 'unsafe-eval'; 
+    connect-src 'self' https://shfe-diplom.neto-server.ru; 
+    font-src 'self' https://fonts.gstatic.com https://fonts.googleapis.com; 
+    style-src 'self' https://fonts.googleapis.com; 
+    img-src 'self' data: https://shfe-diplom.neto-server.ru;">
 </head>
 
 <body>
@@ -23,22 +31,24 @@
             <div class="header__author">
                 <h2 class="heading__popup">Авторизация</h2>
             </div>
-                <form class="form__login">
-                    <div class="filds_login">
-                        <label class="row">
-                            <span class="label__text">E-mail</span>
-                            <input type="text" name="login" class="row__login log" placeholder="example@domain.xyz">
-                        </label>
-                        <label class="row">
-                            <span class="label__text">Пароль</span>
-                            <input type="password" name="password" class="row__login pass">
-                        </label>       
-                    </div>
-                    <div class="btn__admin">
-                        <button class="btn__popup btn__blue">Авторизоваться</button>
-                    </div>
-                </form>
+            <form class="form__login" method="POST" action="/login"> 
+                <div class="filds_login">
+                    <label class="row">
+                        <span class="label__text">E-mail</span>
+                        <input type="email" name="email" class="row__login log" placeholder="example@domain.xyz" required>
+                    </label>
+                    <label class="row">
+                        <span class="label__text">Пароль</span>
+                        <input type="password" name="password" class="row__login pass" required autocomplete="current-password">
+                    </label>
+                </div>
+                <div class="btn__admin">
+                    <button type="submit" class="btn__popup btn__blue">Авторизоваться</button>
+                </div>
+            </form>
         </main>
     </div>
     <script src="./js/login.js"></script>
 </body>
+
+</html>

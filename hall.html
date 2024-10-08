@@ -10,6 +10,13 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+    
+    <meta http-equiv="Content-Security-Policy" content="
+    default-src 'self'; 
+    script-src 'self' 'unsafe-eval'; 
+    connect-src 'self' https://shfe-diplom.neto-server.ru; 
+    font-src 'self' https://fonts.gstatic.com https://fonts.googleapis.com; 
+    style-src 'self' https://fonts.googleapis.com;">
 </head>
 
 <body class="body">
@@ -21,12 +28,11 @@
         <main class="main">
             <section class="buying__info">
                 <div class="buying__info-description">
-                    <!-- Место для отображения информации о фильме -->
-                    <h2 class="film__name"></h2> <!-- Название фильма -->
-                    <h3 class="film__time">Начало сеанса: </h3> <!-- Время начала сеанса -->
-                    <h4 class="hall__number"></h4> <!-- Номер зала -->
+                    <h2 class="film__name"></h2>
+                    <h3 class="film__time">Начало сеанса: </h3>
+                    <h4 class="hall__number"></h4>
                 </div>
-                <div class="buying__info-hint">
+                <div class="buying__info-hint" aria-label="Информация о покупке">
                     <img class="tap__img" src="./images/hint.png" alt="тап">
                     <div class="tap__text">Тапните дважды, чтобы увеличить</div>
                 </div>
@@ -35,7 +41,7 @@
             <section class="buying-scheme">
                 <div class="buying-scheme__wrapper">
                     <img class="screen__img" src="./images/screen.png" alt="экран">
-                    <div class="places">
+                    <div class="places" role="grid" aria-label="Схема мест">
                         <!-- Здесь будут отображены места для сеанса -->
                     </div>
                 </div>
@@ -43,17 +49,10 @@
                     <div class="left__side">
                         <div class="scheme-info">
                             <img class="chair" src="./images/free.png" alt="свободно">
-                            <span class="buying-scheme__chair">Свободно (250руб)</span>
+                            <span class="buying-scheme__chair">Свободно (250₽)</span>
                         </div>
                         <div class="scheme-info">
-                            <img class="chair" src="./images/free_vip.png" alt="свободно вип">
-                            <span class="buying-scheme__chair">Свободно VIP (350руб)</span>
-                        </div>
-                    </div>
-
-                    <div class="right__side">
-                        <div class="scheme-info">
-                            <img class="chair" src="./images/busy.png" alt="занято">
+                            <img class="chair" src="./images/booked.png" alt="занято">
                             <span class="buying-scheme__chair">Занято</span>
                         </div>
                         <div class="scheme-info">
@@ -64,58 +63,11 @@
                 </div>
             </section>
 
-            <!-- Кнопка для бронирования -->
-            <button class="btn">
-                <span class="btn-label">Забронировать</span>
-            </button>    
+            <div class="buying__btn">
+                <button class="buying__btn-buy" type="button">Купить билет</button> <!-- Добавлен type="button" -->
+            </div>
         </main>
     </div>
-
-    <!-- Скрипт для обработки страницы -->
-    <script src="./js/hall.js"></script>
-    <script>
-        // Извлечение параметра seance_id из URL
-        const urlParams = new URLSearchParams(window.location.search);
-        const seanceId = urlParams.get('seance_id');
-    
-        // Проверяем, что seanceId был успешно получен из URL
-        if (seanceId) {
-            console.log(`Получен seance_id: ${seanceId}`);
-            // Функция для запроса данных о сеансе на сервере
-            fetchSeanceData(seanceId);
-        } else {
-            console.error('seance_id не был передан в URL');
-        }
-    
-        // Функция для получения данных по seanceId с сервера
-        async function fetchSeanceData(seanceId) {
-            try {
-                // Отправляем запрос к серверу, используя seanceId
-                const response = await fetch(`http://localhost:9000/seances/${seanceId}`); // Используем HTTP
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-
-                // Получаем данные в формате JSON
-                const data = await response.json();
-
-                // Проверяем, что данные были получены и содержат необходимые поля
-                if (data && data.filmName && data.startTime && data.hallNumber) {
-                    console.log(data); // Выводим данные в консоль
-
-                    // Обновляем элементы на странице данными с сервера
-                    document.querySelector('.film__name').textContent = data.filmName; // Название фильма
-                    document.querySelector('.film__time').textContent += data.startTime; // Время начала сеанса
-                    document.querySelector('.hall__number').textContent = `Зал: ${data.hallNumber}`; // Номер зала
-                } else {
-                    console.error('Некорректные данные с сервера:', data);
-                }
-
-            } catch (error) {
-                // Обрабатываем возможные ошибки при запросе
-                console.error('Ошибка при получении данных:', error);
-            }
-        }
-    </script>
+    <script src="./js/hall.js" defer></script>
 </body>
 </html>
