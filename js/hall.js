@@ -42,7 +42,7 @@ buyingInfo.addEventListener('click', () => {
 // Функция для получения данных о сеансах
 async function fetchSeanceData() {
     try {
-        const response = await fetch('https://shfe-diplom.neto-server.ru/alldata');
+        const response = await fetch('./data/alldata.json'); // Измените на путь к локальному файлу
         if (!response.ok) {
             throw new Error(`Ошибка сети: ${response.statusText}`);
         }
@@ -77,7 +77,7 @@ async function fetchSeanceData() {
 // Функция для получения конфигурации зала
 async function fetchHallConfig(seanceId, checkDate) {
     try {
-        const response = await fetch(`https://shfe-diplom.neto-server.ru/hallconfig?seanceId=${seanceId}&date=${checkDate}`);
+        const response = await fetch('./data/hallconfig.json'); // Измените на путь к локальному файлу
         if (!response.ok) {
             throw new Error('Ошибка сети: ' + response.statusText);
         }

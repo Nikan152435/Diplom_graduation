@@ -1,0 +1,27 @@
+{
+    "result": {
+        "seances": [
+            {
+                "id": 1,
+                "seance_time": "18:00",
+                "seance_filmid": 1,
+                "seance_hallid": 1
+            }
+            
+        ],
+        "films": [
+            {
+                "id": 1,
+                "film_name": "Название Фильма"
+            }
+            
+        ],
+        "halls": [
+            {
+                "id": 1,
+                "hall_name": "Зал 1"
+            }
+            
+        ]
+    }
+}

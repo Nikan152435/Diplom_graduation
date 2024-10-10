@@ -1,0 +1,11 @@
+{
+    "result": [
+        [
+            "vip", "standart", "taken"
+        ],
+        [
+            "standart", "vip", "free"
+        ]
+       
+    ]
+}
