@@ -11,6 +11,8 @@ document.addEventListener("DOMContentLoaded", function() {
   if (!today) {
       console.warn("Элемент с классом 'today' не найден");
       return; // Прекращаем выполнение, если элемент не найден
+    } else {
+        console.log("Элемент с классом 'today' найден.");
   }
 
   let currentDate = new Date();
