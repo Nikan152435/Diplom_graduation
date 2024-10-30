@@ -42,7 +42,7 @@ buyingInfo.addEventListener('click', () => {
 // Функция для получения данных о сеансах
 async function fetchSeanceData() {
     try {
-        const response = await fetch('https://shfe-diplom.neto-server.ru/alldata');
+        const response = await fetch('data.json');
         if (!response.ok) {
             throw new Error(`Ошибка сети: ${response.statusText}`);
         }
@@ -77,7 +77,7 @@ async function fetchSeanceData() {
 // Функция для получения конфигурации зала
 async function fetchHallConfig(seanceId, checkDate) {
     try {
-        const response = await fetch(`https://shfe-diplom.neto-server.ru/hallconfig?seanceId=${seanceId}&date=${checkDate}`);
+        const response = await fetch(`data.json`)
         if (!response.ok) {
             throw new Error('Ошибка сети: ' + response.statusText);
         }
@@ -121,7 +121,7 @@ function setImageForSeats() {
         } else if (placeId === "standart") {
             place.firstElementChild.src = './images/free.png';        
         } else if (placeId === "taken") {
-            place.firstElementChild.src = './images/занято.png';        
+            place.firstElementChild.src = './images/busy.png';        
         }      
     });
 }
@@ -139,7 +139,7 @@ function handleSeatSelection(e) {
             img.classList.remove("check_blue");
         } else {
             // Выбор места
-            img.src = './images/выбрано.png';
+            img.src = './images/selected.png';
             img.classList.add("check_blue");
         }
     }

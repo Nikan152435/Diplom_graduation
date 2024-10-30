@@ -1,0 +1,96 @@
+{
+    "result": {
+        "halls": [
+            {
+                "id": 2541,
+                "name": "Hall 1",
+                "capacity": 100
+            },
+            {
+                "id": 2543,
+                "name": "Hall 2",
+                "capacity": 150
+            },
+            {
+                "id": 2564,
+                "name": "Hall 3",
+                "capacity": 120
+            },
+            {
+                "id": 2567,
+                "name": "Hall 4",
+                "capacity": 200
+            }
+        ],
+        "films": [
+            {
+                "id": 198,
+                "title": "Film Title 1",
+                "duration": "2h"
+            },
+            {
+                "id": 199,
+                "title": "Film Title 2",
+                "duration": "1h 30m"
+            },
+            {
+                "id": 247,
+                "title": "Film Title 3",
+                "duration": "1h 45m"
+            },
+            {
+                "id": 196,
+                "title": "Film Title 4",
+                "duration": "2h 15m"
+            },
+            {
+                "id": 864,
+                "title": "Film Title 5",
+                "duration": "1h 20m"
+            },
+            {
+                "id": 872,
+                "title": "Film Title 6",
+                "duration": "2h 5m"
+            }
+        ]
+    },
+    "seances": [
+        {
+            "id": 1090,
+            "seance_hallid": 2541,
+            "seance_filmid": 198,
+            "seance_time": "17:00"
+        },
+        {
+            "id": 1099,
+            "seance_hallid": 2543,
+            "seance_filmid": 199,
+            "seance_time": "10:00"
+        },
+        {
+            "id": 1101,
+            "seance_hallid": 2541,
+            "seance_filmid": 247,
+            "seance_time": "00:00"
+        },
+        {
+            "id": 1104,
+            "seance_hallid": 2541,
+            "seance_filmid": 196,
+            "seance_time": "11:00"
+        },
+        {
+            "id": 1105,
+            "seance_hallid": 2564,
+            "seance_filmid": 864,
+            "seance_time": "11:00"
+        },
+        {
+            "id": 1106,
+            "seance_hallid": 2567,
+            "seance_filmid": 872,
+            "seance_time": "14:00"
+        }
+    ]
+}

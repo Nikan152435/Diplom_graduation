@@ -22,7 +22,7 @@ async function handleFormSubmit(e) {
 
     // Данные для авторизации
     const loginData = {
-        username: login.value,
+        Login: login.value,
         password: password.value
     };
 
