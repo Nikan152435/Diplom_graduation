@@ -146,7 +146,11 @@ function displayAvailableSeances() {
 // Основной процесс загрузки и отображения данных
 async function main() {
     const data = await fetchData();
-    if (data) {
+    // 
+    if (!data) {
+        console.error('Данные не загружены.');
+        return;
+    
         displaySeances(data);
         displayAvailableSeances();
 
@@ -162,7 +166,7 @@ async function main() {
                 }
 
                 // Сохраняем выбранное время сеанса
-                let checkedSeans = Number(event.target.dataset.id);
+                const checkedSeans = Number(event.target.dataset.id);
                 localStorage.setItem('checkedSeans', checkedSeans);
 
                 // Переход на другую страницу

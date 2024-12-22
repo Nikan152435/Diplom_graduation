@@ -6,7 +6,38 @@ document.addEventListener("DOMContentLoaded", function() {
   const menuListItemArr = Array.from(menuListItem);
   const today = document.querySelector(".today");
   const revers = document.querySelector(".revers");
+  const bigFeatureButton = document.querySelector('.big-feature');
+
+  bigFeatureButton.addEventListener('click', async () => {
+    const module = await import('./largeScript.js');
+    // вызываем экспортируемую по умолчанию функцию
+    module.default(); 
+  });
+  document.addEventListener("DOMContentLoaded", () => {
+    // Проверяем, есть ли глобальная data
+    if (!window.data) {
+      console.error("Глобальная переменная data не определена!");
+      return;
+    }
   
+    console.log("Данные залов:", data.result.halls);
+    // Используем data...
+  });
+   // Использование данных из data.js
+   console.log("Данные залов:", data.result.halls);
+   data.result.halls.forEach(hall => {
+       console.log(`Название зала: ${hall.hall_name}, Ряды: ${hall.hall_rows}`);
+   });
+
+   // Обработка фильмов
+data.result.films.forEach(film => {
+    if (!film.film_poster) {
+      film.film_poster = "./images/posters/placeholder.png"; // Устанавливаем заглушку
+    }
+  });
+  // Используйте эти данные для отображения фильмов
+console.log(data.result.films)
+
   // Проверка на наличие элемента с классом today
   if (!today) {
       console.warn("Элемент с классом 'today' не найден");

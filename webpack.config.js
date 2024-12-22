@@ -43,19 +43,29 @@ module.exports = {
     }),
     new CopyWebpackPlugin({
       patterns: [
+        { from: 'data.json', to: '' }, // Копируем data.json в корень сборки
         { from: 'images', to: 'images', noErrorOnMissing: true },
         { from: 'css', to: 'css', noErrorOnMissing: true },
         { from: 'js', to: 'js', noErrorOnMissing: true },
       ],
     }),
   ],
-  devServer: {
-    static: {
-      directory: path.join(__dirname, 'dist'),
-    },
-    compress: true,
-    port: 9000,
-    hot: true,
-    historyApiFallback: true,
+  performance: {
+    hints: false, // Отключение предупреждений Webpack
   },
+
+
+devServer: { 
+  static: {
+    directory: path.join(__dirname, 'dist'), // Указание директории для статики
+  },
+  compress: true, // Включение gzip-сжатия
+  port: 9000, // Порт для DevServer
+  hot: true, // Включаем Hot Module Replacement (HMR)
+  liveReload: false, // Отключаем живую перезагрузку (чтобы не дублировать HMR)
+  historyApiFallback: true, // Поддержка маршрутизации в SPA
+  watchFiles: {
+    paths: ['./src/**/*'], // Следим за изменениями только в папке src
+  },
+},
 };
