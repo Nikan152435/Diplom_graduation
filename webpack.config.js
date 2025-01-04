@@ -30,6 +30,7 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: './index.html',
       filename: 'index.html',
+      inject: false  // <-- ВАЖНО: отключаем автоподключение
       // Убедитесь, что указанный путь существует, или уберите эту строку
       // favicon: './path/to/favicon.ico',
     }),
@@ -43,6 +44,7 @@ module.exports = {
     }),
     new CopyWebpackPlugin({
       patterns: [
+        { from: 'js/data.js', to: 'js/' },
         { from: 'data.json', to: '' }, // Копируем data.json в корень сборки
         { from: 'images', to: 'images', noErrorOnMissing: true },
         { from: 'css', to: 'css', noErrorOnMissing: true },
@@ -53,9 +55,9 @@ module.exports = {
   performance: {
     hints: false, // Отключение предупреждений Webpack
   },
-
-
-devServer: { 
+};
+// devServer вынесен отдельно
+  module.exports.devServer= { 
   static: {
     directory: path.join(__dirname, 'dist'), // Указание директории для статики
   },
@@ -67,5 +69,4 @@ devServer: {
   watchFiles: {
     paths: ['./src/**/*'], // Следим за изменениями только в папке src
   },
-},
 };

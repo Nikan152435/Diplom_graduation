@@ -1,5 +1,5 @@
 // Данные для локальной работы проекта
-const data = {
+window.data = {
   success: true,
   result: {
     halls: [
@@ -125,6 +125,6 @@ const data = {
     ]
   }
 };
-
+console.log("Загружен ли data.js?", window.data);
 // Экспорт данных для использования в других файлах
 // export default data;
